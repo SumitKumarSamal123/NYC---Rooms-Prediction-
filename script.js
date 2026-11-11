@@ -85,7 +85,7 @@ form.addEventListener("submit", async event => {
   predictionResult.hidden = true;
   loadingState.hidden = false;
   try {
-    const response = await fetch("https://nyc-rooms-prediction.onrender.com", {
+    const response = await fetch("https://nyc-rooms-prediction.onrender.com/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
