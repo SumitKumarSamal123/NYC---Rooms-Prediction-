@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse
 import pandas as pd
 from pydantic import BaseModel, Field
 import joblib
+from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -18,7 +19,11 @@ COLUMNS = ['latitude', 'longitude','price',
        'reviews_per_month', 'calculated_host_listings_count',
        'availability_365','neighbourhood_group', 'neighbourhood']
 
-model = joblib.load("Model_Pipeline.pkl")
+BASE_DIR = Path(__file__).resolve().parent
+
+MODEL_PATH = BASE_DIR / "Model_Pipeline.pkl"
+
+model = joblib.load(MODEL_PATH)
 
 class Features(BaseModel):
     latitude : float = Field(..., ge = -90, le = 90, description = "Latitude coordinate")
